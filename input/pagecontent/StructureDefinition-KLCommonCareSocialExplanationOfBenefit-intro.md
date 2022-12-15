@@ -1,12 +1,11 @@
 ### Scope and usage
-KLCommonCareSocialExplanationOfBenefit is a documentation of a number of decisions/adjudications made in the same case management process in a Danish Municipality e.g. related to a single workflow, case or related to the same request/referal. It might be the case that only one decision is included. This is called a case level decision (Sagsafgørelse) wheras each of the included decisions/adjudications are called intervention level decision (Ydelsesafgørelse). 
-
+KLCommonCareSocialExplanationOfBenefit is a documentation of a number of decisions/adjudications made in the same case management process in a Danish Municipality e.g. related to a single workflow, case or related to the same request/referal. It might be the case that only one decision is included. This is called a decision letter (Afgørelsesbrev) wheras each of the included decisions/adjudications are called intervention level decision (Ydelsesafgørelse). 
 
 The primary actors of a typical municipality decision is the citizen and the municipality. However, FHIR has its origin in states with health insurences, and this information have to be filled out regardless that Denmark does not have this structure in its public health system. So for most simple cases the citizen goes in ExplanationOfBenefit.patient and ExplanationOfBenefit.insurance.beneficiary, and the Municipality is reprensented in the  ExplanationOfBenefit.insurer ExplanationOfBenefit.provider and ExplanationOfBenefit.insurance.payor.
 
-The relationship between a case level decision and a municipality case, can be registered using the ExplanationOfBenefit:extension.municipalityCaseNumber.
+The relationship between a decision letter and a municipality case, can be registered using the ExplanationOfBenefit:extension.municipalityCaseNumber.
 
-The reasons and/or background for a case level decision can be described in ExplanationOfBenefit.disposition. The time where alle the decisions were made, and the municipality is ready to let the citizen know, which decisions have been reached is the ExplanationOfBenefit.created.
+The reasons and/or background for a decision letter can be described in ExplanationOfBenefit.disposition. The time where alle the decisions were made, and the municipality is ready to let the citizen know, which decisions have been reached is the ExplanationOfBenefit.created.
 
 There is a number of type and status fields that must be filled out. The first is ExplanationOfBenefit.status. This attribute has a mandatory FHIR valueset, that makes it possible to correct records entered in error etc. Hovewer, for most use cases it should just be set to "active". The last three just have one fixed value for all municipality use cases:
 * ExplanationOfBenefit.type should be set to 384485b8-385f-4d34-9cb6-a939fe7ff945 "Kommunalt"
@@ -30,16 +29,16 @@ Nedenstående tabel oversætter mellem de attributter, der er defineret i den f�
 {:class="grid"}
 |   FKI-attribut      | Definition        | FHIR  |
 | ------------- |-------------| -----|
-|sagsafgørelsesStatus|indikation af om afgørelsens er aktiv eller er en fejl. |ExplanationOfBenefit.status|
-|sagsafgørelseSektorkode|angivelse af, at afgørelsen vedrører et kommunalt anliggende. |ExplanationOfBenefit.type|
-|sagsafgørelsesBrug|Angivelse af, at dette er en endelig beslutning af at det afgjorte er gældende.|ExplanationOfBenefit.use
-|sagsafgørelseDrejerSigOm|Den borger, som det ansøgte vil tilgodese|ExplanationOfBenefit.patient|
-|sagsafgørelsesRegistreringstid|Tidspunkt, hvor der er kommet en afgørelse i forbindelse med en sag eller anmodning om ydelser. Typisk datoen for udsendelse af afgørelsesbrev.|ExplanationOfBenefit.created|
-|sagsafgørelseBegrundelse|Baggrund og begrundelse for sagsafgørelse |ExplanationOfBenefit.disposition|
-|sagsafgørelseTildelendeOrganisation|Kommune der afgør og tildeler|ExplanationOfBenefit.insurer|
-|sagsafgørelseLeveringsansvarligOrganisation| Kommune der leverer eventuelle ydelser|ExplanationOfBenefit.provider|
-|sagsafgørelseStatusForIndeholdteYdelsesafgørelser|Angivelse af, at dette er en færdig sagsafgørelse, hvor der er taget stilling til de indeholdet ydelsesafgørelser|ExplanationOfBenefit.outcome|
-|sagsafgørelseIndgårISag|Kommunalt sagsnummer på den sag, som afgørelsen vedrører. Enten officielt uuid eller kommune-specifikt nummer|ExplanationOfBenefit:extension.municipalityCaseNumber|
+|afgørelsesbrevStatus|indikation af om afgørelsens er aktiv eller er en fejl. |ExplanationOfBenefit.status|
+|afgørelsesbrevSektorkode|angivelse af, at afgørelsen vedrører et kommunalt anliggende. |ExplanationOfBenefit.type|
+|afgørelsesbrevBrug|Angivelse af, at dette er en endelig beslutning af, at det afgjorte er gældende.|ExplanationOfBenefit.use
+|afgørelsesbrevDrejerSigOm|Den borger, som det ansøgte vil tilgodese|ExplanationOfBenefit.patient|
+|afgørelsesbrevRegistreringstid|Tidspunkt, hvor der er kommet en afgørelse i forbindelse med en sag eller anmodning om ydelser. Typisk datoen for udsendelse af afgørelsesbrev.|ExplanationOfBenefit.created|
+|afgørelsesbrevBegrundelse|Baggrund og begrundelse for afgørelser i brevet |ExplanationOfBenefit.disposition|
+|afgørelsesbrevTildelendeOrganisation|Kommune der afgør og tildeler|ExplanationOfBenefit.insurer|
+|afgørelsesbrevLeveringsansvarligOrganisation| Kommune der leverer eventuelle ydelser|ExplanationOfBenefit.provider|
+|afgørelsesbrevStatusForIndeholdteYdelsesafgørelser|Angivelse af, at dette er et færdigt afgørelsesbrev, hvor der er taget stilling til de indeholdet ydelsesafgørelser|ExplanationOfBenefit.outcome|
+|afgørelsesbrevIndgårISag|Kommunalt sagsnummer på den sag, som afgørelsesbrevet vedrører. Enten officielt uuid eller kommune-specifikt nummer|ExplanationOfBenefit:extension.municipalityCaseNumber|
 |ydelsesafgørelseErBevilligAfIndsats|De fagligt planlagte indsatser/ydelser som ydelsesafgørelsen er bevillig af.|ExplanationOfBenefit.supportingInfo.valueReference|
 |ydelsesafgørelseErBevilligAfIndsats|De fagligt planlagte indsatser/ydelser som ydelsesafgørelsen er bevillig af.|ExplanationOfBenefit.item.informationSequence|
 |ydelsesafgørelseAnsøgtYdelse|Det der er ansøgt om udtrykt i tekst inklusiv hvad der ansøges om, og i hvilket omfang |ExplanationOfBenefit.item.productOrService.text|
